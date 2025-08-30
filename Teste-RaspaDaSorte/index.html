@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspa da Sorte - Sua Sorte Começa Aqui</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ========================
+         CABEÇALHO PERSISTENTE
+    ========================= -->
+    <header class="main-header">
+        <div class="container">
+            <h1 class="logo">Raspa da Sorte <i class="fas fa-clover"></i></h1>
+            <nav class="main-nav">
+                <a href="#" id="balance-btn" class="btn btn-secondary"><i class="fas fa-wallet"></i> <span id="balance-display">R$ 0,00</span></a>
+                <a href="#" class="btn btn-primary" data-action="deposit"><i class="fas fa-arrow-down"></i> Depositar</a>
+                <a href="#" class="btn btn-outline" data-action="withdraw"><i class="fas fa-arrow-up"></i> Sacar</a>
+                <a href="#" class="btn btn-outline" data-action="login"><i class="fas fa-user"></i> Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================
+         PÁGINA INICIAL
+    ========================= -->
+    <main id="home-page">
+        <!-- Seção do Banner -->
+        <section class="banner-section">
+            <div class="container">
+                <div class="banner-placeholder">
+                    <span>[Imagem de um banner promocional]</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carrossel de Ganhadores -->
+        <section class="winners-carousel-section">
+            <div class="container">
+                <h2 class="section-title"><span class="live-dot"></span> Ganhos ao Vivo</h2>
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <!-- Ganhadores serão inseridos aqui pelo JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção das Raspadinhas -->
+        <section class="scratchcards-section">
+            <div class="container">
+                <h2 class="section-title">Nossas Raspadinhas</h2>
+                <div class="scratchcards-grid">
+                    
+                    <!-- Raspadinha 1 -->
+                    <div class="scratch-card"
+                         id="card-premio-relampago" 
+                         data-price="1.00" 
+                         data-prizes='[
+                            {"type": "cash", "value": 1, "name": "R$ 1,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+1"},
+                            {"type": "cash", "value": 2, "name": "R$ 2,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+2"},
+                            {"type": "cash", "value": 5, "name": "R$ 5,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+5"},
+                            {"type": "cash", "value": 10, "name": "R$ 10,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+10"},
+                            {"type": "item", "name": "PIX de R$ 20", "value": "R$ 20,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+20"},
+                            {"type": "item", "name": "Fone Bluetooth", "value": "R$ 150,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Fone"},
+                            {"type": "item", "name": "Caixa de Som JBL", "value": "R$ 250,00", "image": "https://placehold.co/100x80/ffffff/000000?text=JBL"},
+                            {"type": "item", "name": "Relógio Smartwatch", "value": "R$ 300,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Watch"},
+                            {"type": "item", "name": "PIX de R$ 50", "value": "R$ 50,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+50"},
+                            {"type": "item", "name": "Teclado Gamer", "value": "R$ 200,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Teclado"},
+                            {"type": "item", "name": "Mouse Gamer", "value": "R$ 180,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Mouse"},
+                            {"type": "item", "name": "Headset Gamer", "value": "R$ 220,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Headset"},
+                            {"type": "item", "name": "PIX de R$ 100", "value": "R$ 100,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+100"},
+                            {"type": "item", "name": "Monitor 24”", "value": "R$ 800,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Monitor"},
+                            {"type": "item", "name": "Cadeira de Escritório", "value": "R$ 500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Cadeira"},
+                            {"type": "item", "name": "PIX de R$ 250", "value": "R$ 250,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+250"},
+                            {"type": "item", "name": "Celular Básico", "value": "R$ 700,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Celular"},
+                            {"type": "item", "name": "Tablet", "value": "R$ 900,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Tablet"},
+                            {"type": "item", "name": "PIX de R$ 500", "value": "R$ 500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+500"},
+                            {"type": "cash", "value": 1000, "name": "R$ 1.000,00", "image": "https://placehold.co/100x80/DAA520/000000?text=R%24+1k", "isJackpot": true}
+                        ]'
+                         data-symbols='["gem", "money-bag", "bell", "clover", "cherries", "lemon", "star"]'>
+                        <div class="card-image-placeholder"><span>[Imagem de um raio dourado]</span></div>
+                        <div class="card-info">
+                            <h3>Prêmio Relâmpago</h3>
+                            <p>Prêmios de até R$ 1.000</p>
+                            <button class="btn btn-play" data-action="open-purchase-modal">Jogar R$ 1,00</button>
+                        </div>
+                    </div>
+
+                    <!-- Raspadinha 2 -->
+                    <div class="scratch-card"
+                         id="card-febre-do-ouro"
+                         data-price="2.50" 
+                         data-prizes=
+                        '[
+                            {"type": "cash", "value": 2.5, "name": "R$ 2,50", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+2.50"},
+                            {"type": "cash", "value": 5, "name": "R$ 5,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+5"},
+                            {"type": "cash", "value": 10, "name": "R$ 10,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+10"},
+                            {"type": "cash", "value": 25, "name": "R$ 25,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+25"},
+                            {"type": "item", "name": "PIX de R$ 50", "value": "R$ 50,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+50"},
+                            {"type": "item", "name": "Air Fryer", "value": "R$ 400,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Fryer"},
+                            {"type": "item", "name": "Aspirador Robô", "value": "R$ 500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Robo"},
+                            {"type": "item", "name": "Máquina de Café", "value": "R$ 350,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Cafe"},
+                            {"type": "item", "name": "PIX de R$ 100", "value": "R$ 100,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+100"},
+                            {"type": "item", "name": "Cadeira Gamer", "value": "R$ 900,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Cadeira"},
+                            {"type": "item", "name": "Monitor Gamer", "value": "R$ 1.200,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Monitor"},
+                            {"type": "item", "name": "PIX de R$ 250", "value": "R$ 250,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+250"},
+                            {"type": "item", "name": "Celular Intermediário", "value": "R$ 1.500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Celular"},
+                            {"type": "item", "name": "Smart TV 43”", "value": "R$ 1.800,00", "image": "https://placehold.co/100x80/ffffff/000000?text=TV"},
+                            {"type": "item", "name": "PIX de R$ 500", "value": "R$ 500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+500"},
+                            {"type": "item", "name": "Nintendo Switch Lite", "value": "R$ 1.600,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Switch"},
+                            {"type": "item", "name": "Frigobar", "value": "R$ 700,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Frigobar"},
+                            {"type": "item", "name": "PIX de R$ 1.000", "value": "R$ 1.000,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+1k"},
+                            {"type": "item", "name": "Bicicleta", "value": "R$ 1.100,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Bike"},
+                            {"type": "cash", "value": 2500, "name": "R$ 2.500,00", "image": "https://placehold.co/100x80/DAA520/000000?text=R%24+2.5k", "isJackpot": true}
+                        ]'
+                         data-symbols='["gem", "money-bag", "bell", "clover", "cherries", "lemon", "star"]'>
+                        <div class="card-image-placeholder"><span>[Imagem de uma pepita de ouro]</span></div>
+                        <div class="card-info">
+                            <h3>Febre do Ouro</h3>
+                            <p>Prêmios de até R$ 2.500</p>
+                            <button class="btn btn-play" data-action="open-purchase-modal">Jogar R$ 2,50</button>
+                        </div>
+                    </div>
+
+                    <!-- Raspadinha 3 - MAIS VENDIDA -->
+                    <div class="scratch-card popular" 
+                         id="card-cofre-premiado"
+                         data-price="5.00" 
+                         data-prizes=
+                        '[
+                            {"type": "cash", "value": 5, "name": "R$ 5,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+5"},
+                            {"type": "cash", "value": 10, "name": "R$ 10,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+10"},
+                            {"type": "cash", "value": 25, "name": "R$ 25,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+25"},
+                            {"type": "cash", "value": 50, "name": "R$ 50,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+50"},
+                            {"type": "item", "name": "PIX de R$ 100", "value": "R$ 100,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+100"},
+                            {"type": "item", "name": "Smart TV 50”", "value": "R$ 2.500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=TV"},
+                            {"type": "item", "name": "Nintendo Switch", "value": "R$ 2.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Switch"},
+                            {"type": "item", "name": "PIX de R$ 250", "value": "R$ 250,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+250"},
+                            {"type": "item", "name": "Celular Avançado", "value": "R$ 2.800,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Celular"},
+                            {"type": "item", "name": "Xbox Series S", "value": "R$ 2.200,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Xbox"},
+                            {"type": "item", "name": "PIX de R$ 500", "value": "R$ 500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+500"},
+                            {"type": "item", "name": "Notebook Básico", "value": "R$ 2.800,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Notebook"},
+                            {"type": "item", "name": "Geladeira", "value": "R$ 3.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Geladeira"},
+                            {"type": "item", "name": "Fogão 5 bocas", "value": "R$ 1.500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Fogao"},
+                            {"type": "item", "name": "PIX de R$ 1.000", "value": "R$ 1.000,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+1k"},
+                            {"type": "item", "name": "Playstation 5", "value": "R$ 4.500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=PS5"},
+                            {"type": "item", "name": "iPhone 15", "value": "R$ 7.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=iPhone"},
+                            {"type": "item", "name": "PIX de R$ 2.500", "value": "R$ 2.500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+2.5k"},
+                            {"type": "item", "name": "Notebook Gamer", "value": "R$ 5.500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Notebook+Gamer"},
+                            {"type": "cash", "value": 5000, "name": "R$ 5.000,00", "image": "https://placehold.co/100x80/DAA520/000000?text=R%24+5k", "isJackpot": true}
+                        ]' 
+                         data-symbols='["gem", "money-bag", "bell", "clover", "cherries", "lemon", "star"]'>
+                        <div class="promo-tag">MAIS VENDIDA</div>
+                        <div class="card-image-placeholder"><span>[Imagem de um cofre aberto]</span></div>
+                        <div class="card-info">
+                            <h3>Cofre Premiado</h3>
+                            <p>Prêmios de até R$ 5.000</p>
+                            <button class="btn btn-play" data-action="open-purchase-modal">Jogar R$ 5,00</button>
+                        </div>
+                    </div>
+
+                    <!-- Raspadinha 4 -->
+                    <div class="scratch-card"
+                         id="card-mina-de-diamantes"
+                         data-price="10.00" 
+                         data-prizes=
+                        '[ 
+                            {"type": "cash", "value": 10, "name": "R$ 10,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+10"},
+                            {"type": "cash", "value": 20, "name": "R$ 20,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+20"},
+                            {"type": "cash", "value": 50, "name": "R$ 50,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+50"},
+                            {"type": "cash", "value": 100, "name": "R$ 100,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+100"},
+                            {"type": "item", "name": "PIX de R$ 250", "value": "R$ 250,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+250"},
+                            {"type": "item", "name": "iPhone 15 Pro", "value": "R$ 9.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=iPhone+Pro"},
+                            {"type": "item", "name": "Macbook Air", "value": "R$ 10.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Macbook"},
+                            {"type": "item", "name": "PIX de R$ 500", "value": "R$ 500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+500"},
+                            {"type": "item", "name": "Viagem Nacional", "value": "R$ 4.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Viagem"},
+                            {"type": "item", "name": "PC Gamer Básico", "value": "R$ 4.500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=PC+Gamer"},
+                            {"type": "item", "name": "PIX de R$ 1.000", "value": "R$ 1.000,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+1k"},
+                            {"type": "item", "name": "TV 65” 4K", "value": "R$ 3.500,00", "image": "https://placehold.co/100x80/ffffff/000000?text=TV+65"},
+                            {"type": "item", "name": "Sofá Retrátil", "value": "R$ 2.800,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Sofa"},
+                            {"type": "item", "name": "PIX de R$ 2.500", "value": "R$ 2.500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+2.5k"},
+                            {"type": "item", "name": "Drone DJI", "value": "R$ 3.800,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Drone"},
+                            {"type": "item", "name": "Projetor 4K", "value": "R$ 2.200,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Projetor"},
+                            {"type": "item", "name": "PIX de R$ 5.000", "value": "R$ 5.000,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+5k"},
+                            {"type": "item", "name": "Macbook Pro", "value": "R$ 15.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Mac+Pro"},
+                            {"type": "item", "name": "PC Gamer Avançado", "value": "R$ 8.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=PC+Pro"},
+                            {"type": "cash", "value": 7500, "name": "R$ 7.500,00", "image": "https://placehold.co/100x80/DAA520/000000?text=R%24+7.5k", "isJackpot": true}
+                        ]'
+
+                         data-symbols='["gem", "money-bag", "bell", "clover", "cherries", "lemon", "star"]'>
+                        <div class="card-image-placeholder"><span>[Imagem de um diamante brilhante]</span></div>
+                        <div class="card-info">
+                            <h3>Mina de Diamantes</h3>
+                            <p>Prêmios de até R$ 7.500</p>
+                            <button class="btn btn-play" data-action="open-purchase-modal">Jogar R$ 10,00</button>
+                        </div>
+                    </div>
+
+                    <!-- Raspadinha 5 -->
+                    <div class="scratch-card"
+                         id="card-magnata-instantaneo"
+                         data-price="20.00" 
+                         data-prizes=
+                        '[
+                            {"type": "cash", "value": 20, "name": "R$ 20,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+20"},
+                            {"type": "cash", "value": 40, "name": "R$ 40,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+40"},
+                            {"type": "cash", "value": 100, "name": "R$ 100,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+100"},
+                            {"type": "cash", "value": 250, "name": "R$ 250,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+250"},
+                            {"type": "item", "name": "PIX de R$ 500", "value": "R$ 500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+500"},
+                            {"type": "item", "name": "Macbook Air", "value": "R$ 10.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Macbook"},
+                            {"type": "item", "name": "Viagem Nacional", "value": "R$ 8.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Viagem"},
+                            {"type": "item", "name": "PIX de R$ 1.000", "value": "R$ 1.000,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+1k"},
+                            {"type": "item", "name": "PC Gamer Básico", "value": "R$ 9.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=PC+Gamer"},
+                            {"type": "item", "name": "Smart TV 65” 4K", "value": "R$ 5.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=TV+65"},
+                            {"type": "item", "name": "PIX de R$ 2.500", "value": "R$ 2.500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+2.5k"},
+                            {"type": "item", "name": "Sofá Retrátil", "value": "R$ 5.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Sofa"},
+                            {"type": "item", "name": "Drone DJI", "value": "R$ 7.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Drone"},
+                            {"type": "item", "name": "Projetor 4K", "value": "R$ 4.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Projetor"},
+                            {"type": "item", "name": "PIX de R$ 5.000", "value": "R$ 5.000,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+5k"},
+                            {"type": "item", "name": "Macbook Pro", "value": "R$ 15.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Mac+Pro"},
+                            {"type": "item", "name": "PC Gamer Avançado", "value": "R$ 12.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=PC+Pro"},
+                            {"type": "item", "name": "Viagem Internacional", "value": "R$ 15.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Viagem+Int"},
+                            {"type": "item", "name": "Moto Honda Biz", "value": "R$ 12.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Biz"},
+                            {"type": "cash", "value": 10000, "name": "R$ 10.000,00", "image": "https://placehold.co/100x80/DAA520/000000?text=R%24+10k", "isJackpot": true}
+                        ]'
+
+                         data-symbols='["gem", "money-bag", "bell", "clover", "cherries", "lemon", "star"]'>
+                        <div class="card-image-placeholder"><span>[Imagem de um magnata de terno]</span></div>
+                        <div class="card-info">
+                            <h3>Magnata Instantâneo</h3>
+                            <p>Prêmios de até R$ 10.000</p>
+                            <button class="btn btn-play" data-action="open-purchase-modal">Jogar R$ 20,00</button>
+                        </div>
+                    </div>
+
+                    <!-- Raspadinha 6 - PROMOCIONAL -->
+                    <div class="scratch-card promo-card"
+                         id="card-destino-milionario"
+                         data-price="50.00" 
+                         data-prizes=
+                        '[
+                            {"type": "cash", "value": 50, "name": "R$ 50,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+50"},
+                            {"type": "cash", "value": 100, "name": "R$ 100,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+100"},
+                            {"type": "cash", "value": 250, "name": "R$ 250,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+250"},
+                            {"type": "cash", "value": 500, "name": "R$ 500,00", "image": "https://placehold.co/100x80/1a1a1a/DAA520?text=R%24+500"},
+                            {"type": "item", "name": "PIX de R$ 1.000", "value": "R$ 1.000,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+1k"},
+                            {"type": "item", "name": "Moto Honda Biz", "value": "R$ 12.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Biz"},
+                            {"type": "item", "name": "Viagem Internacional", "value": "R$ 15.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Viagem+Int"},
+                            {"type": "item", "name": "PIX de R$ 2.500", "value": "R$ 2.500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+2.5k"},
+                            {"type": "item", "name": "Rolex (Réplica de Luxo )", "value": "R$ 5.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Rolex"},
+                            {"type": "item", "name": "PC Gamer High-End", "value": "R$ 18.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=PC+High"},
+                            {"type": "item", "name": "PIX de R$ 5.000", "value": "R$ 5.000,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+5k"},
+                            {"type": "item", "name": "Moto Honda CG 160", "value": "R$ 17.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=CG+160"},
+                            {"type": "item", "name": "Reforma de um cômodo", "value": "R$ 10.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Reforma"},
+                            {"type": "item", "name": "PIX de R$ 7.500", "value": "R$ 7.500,00", "image": "https://placehold.co/100x80/32CD32/000000?text=PIX+7.5k"},
+                            {"type": "item", "name": "Carro Fiat Mobi (Entrada )", "value": "R$ 20.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Mobi"},
+                            {"type": "item", "name": "1 Ano de Salário Mínimo", "value": "R$ 15.600,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Salario"},
+                            {"type": "item", "name": "Barra de Ouro 50g", "value": "R$ 18.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Ouro"},
+                            {"type": "item", "name": "Rolex Explorer II", "value": "R$ 60.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Rolex+Exp"},
+                            {"type": "item", "name": "Volkswagen Nivus", "value": "R$ 130.000,00", "image": "https://placehold.co/100x80/ffffff/000000?text=Nivus"},
+                            {"type": "cash", "value": 50000, "name": "R$ 50.000,00", "image": "https://placehold.co/100x80/DAA520/000000?text=R%24+50k", "isJackpot": true}
+                        ]' 
+                         data-symbols='["gem", "money-bag", "bell", "clover", "cherries", "lemon", "star"]'>
+                        <div class="promo-tag">MAIOR PRÊMIO</div>
+                        <div class="card-image-placeholder"><span>[Imagem de um passaporte e um carro de luxo]</span></div>
+                        <div class="card-info">
+                            <h3>Destino Milionário</h3>
+                            <p>Prêmios de até R$ 15.000</p>
+                            <button class="btn btn-play" data-action="open-purchase-modal">Jogar R$ 50,00</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================
+             SEÇÃO: ÚLTIMOS GANHADORES
+        ========================= -->
+        <section class="latest-winners-section">
+            <div class="container">
+                <h2 class="section-title">Últimos Ganhadores</h2>
+                <div class="latest-winners-list" id="latest-winners-list">
+                    <!-- Ganhadores serão inseridos aqui pelo JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================
+         MODAL DO JOGO
+    ========================= -->
+    <div id="game-modal-overlay" class="modal-overlay hidden">
+        <div id="game-modal-container" class="modal-container">
+            <main class="game-main">
+                <div class="game-header">
+                    <button id="back-to-home" class="btn btn-outline btn-sm"><i class="fas fa-arrow-left"></i> Voltar</button>
+                    <h2 id="game-title">Nome da Raspadinha</h2>
+                </div>
+                
+                <div class="prizes-area">
+                    <h3 class="section-title">Prêmios da Raspadinha:</h3>
+                    <div class="prizes-carousel-container">
+                        <div id="prizes-carousel-track" class="carousel-track">
+                            <!-- Prêmios serão inseridos aqui pelo JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-area">
+                    <div class="scratch-area-container">
+                        <div id="symbols-grid-underneath" class="symbols-grid">
+                            <!-- Os 9 símbolos serão inseridos aqui pelo JS -->
+                        </div>
+                        <canvas id="scratch-game-canvas"></canvas>
+                        <!-- PAINEL DE COMPRA -->
+                        <div id="purchase-overlay" class="purchase-overlay">
+                            <i class="fas fa-ticket-alt purchase-icon"></i>
+                            <p>Comprar por <span id="purchase-price">R$ 0,00</span></p>
+                            <button id="purchase-btn" class="btn btn-primary btn-purchase">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                            <p class="purchase-info">Raspe, encontre 3 símbolos iguais e ganhe!</p>
+                        </div>
+                    </div>
+                    <div id="game-result" class="game-result-message">
+                        Clique em "Comprar" para iniciar o jogo
+                    </div>
+                    <button id="play-again-game" class="btn btn-primary hidden">Jogar Novamente</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ========================
+         FOOTER
+    ========================= -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2 class="logo">Raspa da Sorte <i class="fas fa-clover"></i></h2>
+                </div>
+                <div class="footer-links">
+                    <div class="link-column">
+                        <h4>Regulamentos</h4>
+                        <a href="#">Jogo Responsável</a>
+                        <a href="#">Política de Privacidade</a>
+                        <a href="#">Termos de Uso</a>
+                    </div>
+                    <div class="link-column">
+                        <h4>Ajuda</h4>
+                        <a href="#">Perguntas Frequentes</a>
+                        <a href="#">Como Jogar</a>
+                        <a href="#">Suporte Técnico</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Raspa da Sorte. Todos os direitos reservados.</p>
+                <p>Jogue com responsabilidade.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================
+         MODAIS (POPUPS)
+    ========================= -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div id="modal-container" class="modal-container">
+            <!-- O conteúdo do modal será inserido aqui pelo JS -->
+        </div>
+    </div>
+
+    <!-- ========================
+         ANIMAÇÃO DE VITÓRIA
+    ========================= -->
+    <canvas id="win-confetti-canvas"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
