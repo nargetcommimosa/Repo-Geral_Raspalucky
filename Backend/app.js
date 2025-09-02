@@ -5,7 +5,7 @@ const http = require('http');
 
 // Importações de configuração
 const { db, setupMiddleware } = require('./src/config');
-const setupWebSocket = require('./src/sockets/websocket');
+const websocket = require('./src/sockets/websocket'); // ✅ Importação única
 
 // Importações de rotas
 const authRoutes = require('./src/routes/auth');
@@ -16,9 +16,6 @@ const adminRoutes = require('./src/routes/admin');
 
 // Importações de middleware
 const { authenticateToken, authenticateAdmin } = require('./src/middleware');
-const { validarCPF } = require('./src/utils/validators');
-
-const { setupWebSocket, notificationService } = require('./src/sockets/websocket');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,29 +24,8 @@ const PORT = process.env.PORT || 3000;
 setupMiddleware(app);
 
 // --- ROTAS DA APLICAÇÃO ---
-app.get('/api/health', async (req, res) => {
-    const healthCheck = {
-        status: 'OK',
-        timestamp: new Date().toISOString(),
-        environment: process.env.NODE_ENV || 'development'
-    };
-
-    try {
-        // Verificar conexão com banco
-        await pool.query('SELECT 1');
-        healthCheck.database = 'connected';
-    } catch (error) {
-        healthCheck.database = 'disconnected';
-        healthCheck.status = 'unhealthy';
-    }
-
-    // Verificar WebSocket
-    healthCheck.websocket = {
-        clients: notificationService.clients.size,
-        status: notificationService.clients.size > 0 ? 'active' : 'inactive'
-    };
-
-    res.status(healthCheck.status === 'OK' ? 200 : 503).json(healthCheck);
+app.get('/api/health', (req, res) => {
+  res.status(200).send('Backend está saudável e a funcionar!');
 });
 
 // Rotas de autenticação
@@ -61,19 +37,8 @@ app.use('/api/user', authenticateToken, userRoutes);
 // Rotas de jogo (requerem autenticação)
 app.use('/api/game', authenticateToken, gameRoutes);
 
-app.set('trust proxy', true); // Para funcionar atrás de proxy/reverse proxy
-
-// Ou adicione este middleware específico
-app.use((req, res, next) => {
-    req.realIp = req.ip || 
-                 req.connection.remoteAddress || 
-                 req.socket.remoteAddress ||
-                 (req.connection.socket ? req.connection.socket.remoteAddress : null);
-    next();
-})
-
 // Rotas de pagamento
-app.use('/api/deposit', paymentRoutes); // webhook não precisa de autenticação
+app.use('/api/deposit', paymentRoutes);
 
 // Rotas de administração (requerem chave de admin)
 app.use('/api/admin', authenticateAdmin, adminRoutes);
@@ -81,8 +46,8 @@ app.use('/api/admin', authenticateAdmin, adminRoutes);
 // --- INICIALIZAÇÃO DO SERVIDOR ---
 const server = http.createServer(app);
 
-// Configurar WebSocket
-setupWebSocket(server);
+// Configurar WebSocket ✅ Usando a importação correta
+const wss = websocket.setupWebSocket(server);
 
 // Inicializar banco de dados e iniciar servidor
 db.initializeDB()
@@ -96,5 +61,5 @@ db.initializeDB()
     process.exit(1);
   });
 
-// Exportar app para testes (opcional)
+// Exportar app para testes
 module.exports = app;
