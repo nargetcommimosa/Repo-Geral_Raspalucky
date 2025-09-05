@@ -1,80 +1,49 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { pool } = require('../config/database');
+// src/controllers/authController.js (Refatorado)
+const authService = require('../services/authService');
+const { handleError } = require('../middleware/errorHandler');
 
-class AuthService {
-    async registerUser(userData) {
-        const client = await pool.connect();
-        
+class AuthController {
+    async register(req, res) {
         try {
-            await client.query('BEGIN');
+            const { user, token } = await authService.registerUser(req.body);
             
-            const hashedPassword = await bcrypt.hash(userData.password, 10);
-            const { affiliateId, bonusAmount } = await this.processReferral(userData.referralCode);
-            
-            const initialBalance = 100.00 + bonusAmount;
-            
-            const result = await client.query(
-                `INSERT INTO users (username, email, password, cpf, phone, balance, affiliate_id) 
-                 VALUES ($1, $2, $3, $4, $5, $6, $7) 
-                 RETURNING id, username, email, phone, balance`,
-                [userData.username, userData.email, hashedPassword, 
-                 userData.cpf.replace(/\D/g, ''), userData.phone, initialBalance, affiliateId]
-            );
-            
-            await client.query('COMMIT');
-            return result.rows[0];
+            res.status(201).json({
+                message: "Usuário registrado com sucesso!",
+                user,
+                token
+            });
         } catch (error) {
-            await client.query('ROLLBACK');
-            throw error;
-        } finally {
-            client.release();
-        }
-    }
-
-    async processReferral(referralCode) {
-        let affiliateId = null;
-        let bonusAmount = 0;
-
-        if (referralCode) {
-            const affiliateResult = await pool.query(
-                "SELECT id FROM affiliates WHERE referral_code = $1", 
-                [referralCode]
-            );
-            
-            if (affiliateResult.rows.length > 0) {
-                affiliateId = affiliateResult.rows[0].id;
-                bonusAmount = 20.00;
+            // Tratamento de erro específico para registo
+            if (error.message.includes('já cadastrado')) {
+                return res.status(409).json({ success: false, message: error.message });
             }
+            if (error.message.includes('inválido')) {
+                return res.status(400).json({ success: false, message: error.message });
+            }
+            handleError(res, error);
         }
-        
-        return { affiliateId, bonusAmount };
     }
 
-    async authenticateUser(email, password) {
-        const result = await pool.query(
-            "SELECT * FROM users WHERE email = $1", 
-            [email]
-        );
-        
-        const user = result.rows[0];
-        if (!user) return null;
-        
-        const isValid = await bcrypt.compare(password, user.password);
-        if (!isValid) return null;
-        
-        // Remover senha do objeto de usuário
-        const { password: _, ...userWithoutPassword } = user;
-        return userWithoutPassword;
-    }
+    async login(req, res) {
+        try {
+            const { email, password } = req.body;
+            const user = await authService.authenticateUser(email, password);
 
-    generateToken(user) {
-        return jwt.sign(
-            { userId: user.id, email: user.email },
-            process.env.JWT_SECRET,
-            { expiresIn: '1d' }
-        );
+            if (!user) {
+                return res.status(401).json({ message: 'E-mail ou senha inválidos' });
+            }
+
+            const token = authService.generateToken(user);
+
+            res.status(200).json({
+                message: "Login bem-sucedido!",
+                token,
+                user
+            });
+        } catch (error) {
+            handleError(res, error);
+        }
     }
 }
 
-module.exports = AuthService;
+module.exports = new AuthController();

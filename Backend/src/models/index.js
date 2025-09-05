@@ -1,7 +1,6 @@
-// Ponto central para exportar todos os models
-const User = require('./User');
-const Affiliate = require('./affiliate');
-const Transaction = require('./transaction');
+const User = require('./User'); 
+const Affiliate = require('./Affiliate');
+const Transaction = require('./Transaction'); 
 
 module.exports = {
   User,

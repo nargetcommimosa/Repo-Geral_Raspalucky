@@ -1,8 +1,10 @@
 const PaymentService = require('../services/paymentService');
+const UserService = require('../services/userService'); 
 const { pool } = require('../config/database');
 const { handleError } = require('../middleware/errorHandler');
 
 const paymentService = new PaymentService();
+const userService = new UserService(); 
 
 class PaymentController {
     async createPixDeposit(req, res) {
@@ -10,10 +12,7 @@ class PaymentController {
             const { amount } = req.body;
             const { userId } = req.user;
             
-            // Capturar IP do usuário (importante para a TechBynet)
             const userIp = req.ip || req.connection.remoteAddress || req.socket.remoteAddress;
-            
-            // Buscar dados completos do usuário
             const userResult = await pool.query(
                 "SELECT id, username, email, cpf, phone FROM users WHERE id = $1",
                 [userId]
@@ -27,7 +26,6 @@ class PaymentController {
                 });
             }
             
-            // Adicionar IP aos dados do usuário
             userData.ip = userIp;
             
             const pixData = await paymentService.createPixTransaction(userData, amount);
@@ -59,8 +57,7 @@ class PaymentController {
                 const result = await paymentService.processPaymentConfirmation(data);
                 
                 if (result.success) {
-                    // Aqui você implementaria a lógica para creditar o saldo
-                    await this.creditUserBalance(result.userEmail, result.amount);
+                    await userService.creditDeposit(result.userEmail, result.amount);
                 }
                 
                 res.status(200).json({ 
@@ -70,7 +67,7 @@ class PaymentController {
             } else {
                 res.status(200).json({ 
                     success: true, 
-                    message: "Webhook recebido (não actionável)." 
+                    message: "Webhook recebido (não acionável)." 
                 });
             }
         } catch (error) {
@@ -79,21 +76,6 @@ class PaymentController {
                 success: false, 
                 message: "Erro interno no processamento do webhook." 
             });
-        }
-    }
-
-    async creditUserBalance(email, amount) {
-        try {
-            await pool.query(
-                `UPDATE users 
-                 SET balance = balance + $1, 
-                     total_deposited = total_deposited + $1 
-                 WHERE email = $2`,
-                [amount, email]
-            );
-            console.log(`Saldo de R$ ${amount} creditado para: ${email}`);
-        } catch (error) {
-            console.error('Erro ao creditar saldo:', error);
         }
     }
 

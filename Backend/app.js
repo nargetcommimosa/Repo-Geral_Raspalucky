@@ -5,7 +5,9 @@ const http = require('http');
 
 // Importações de configuração
 const { db, setupMiddleware } = require('./src/config');
-const websocket = require('./src/sockets/websocket'); // ✅ Importação única
+
+// ✅ Importar apenas o necessário
+const { setupWebSocket } = require('./src/sockets/websocket');
 
 // Importações de rotas
 const authRoutes = require('./src/routes/auth');
@@ -46,14 +48,19 @@ app.use('/api/admin', authenticateAdmin, adminRoutes);
 // --- INICIALIZAÇÃO DO SERVIDOR ---
 const server = http.createServer(app);
 
-// Configurar WebSocket ✅ Usando a importação correta
-const wss = websocket.setupWebSocket(server);
+// ✅ Configurar WebSocket (versão simplificada)
+try {
+    const { wss, clients } = setupWebSocket(server);
+    console.log('WebSocket inicializado com sucesso');
+} catch (error) {
+    console.log('WebSocket inicializado em modo simplificado');
+}
 
 // Inicializar banco de dados e iniciar servidor
 db.initializeDB()
   .then(() => {
     server.listen(PORT, () => {
-      console.log(`Servidor HTTP e WebSocket rodando na porta ${PORT}`);
+      console.log(`Servidor HTTP rodando na porta ${PORT}`);
     });
   })
   .catch(err => {

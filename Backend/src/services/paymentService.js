@@ -9,17 +9,26 @@ class PaymentService {
     async createPixTransaction(userData, amount) {
         try {
             const payload = this.createTransactionPayload(amount, userData);
-            const response = await this.sendTransactionRequest(payload);
+    
+            const apiResponse = await this.sendTransactionRequest(payload);
             
+            const responseData = apiResponse.data.data;
+            const qrCodeText = responseData?.pix?.qrcode || responseData?.qrCode;
+
+            if (!qrCodeText) {
+                console.error('Resposta da Bynet não continha um QR Code no local esperado:', apiResponse.data);
+                throw new Error('A resposta da API de pagamento não incluiu um QR Code válido.');
+            }
+
             return {
                 success: true,
-                qrCodeBase64: response.data.qrCode,
-                qrCodeText: response.data.payUrl,
-                transactionId: response.data.id,
-                expiresIn: 300
+                qrCodeText: qrCodeText,
+                transactionId: responseData.id,
+                expiresIn: 600
             };
+
         } catch (error) {
-            console.error('Erro ao criar transação PIX:', error.response?.data || error.message);
+            console.error('Erro detalhado ao criar transação PIX:', error.response?.data || error.message);
             return {
                 success: false,
                 error: 'Falha ao processar transação PIX',
@@ -72,8 +81,8 @@ class PaymentService {
             }],
             
             pix: {
-                expiresIn: 86400 // 24 horas em segundos
-            }
+                "expiresInDays": 1
+            },
         };
     }
 
@@ -87,7 +96,7 @@ class PaymentService {
                     'x-api-key': this.apiKey,
                     'User-Agent': 'AtivoB2B/1.0'
                 },
-                timeout: 30000 // 30 segundos timeout
+                timeout: 30000 
             }
         );
     }
